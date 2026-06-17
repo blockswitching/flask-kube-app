@@ -1,0 +1,10 @@
+python-docker-cicd.py
+deployment.yaml
+service.yaml
+Dockerfile
+.venv/
+logs.txt
+__pycache__/
+.env
+.DS_Store
+.vscode/
