@@ -1,7 +1,6 @@
 python-docker-cicd.py
 deployment.yaml
 service.yaml
-Dockerfile
 .venv/
 logs.txt
 __pycache__/
