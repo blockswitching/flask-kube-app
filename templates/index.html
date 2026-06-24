@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Flask + Docker Learning Project{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Welcome to the Flask + Docker Learning Project</h1>
+    <p class="subtitle">A hands-on project to learn how to containerize a Python web application</p>
+</section>
+
+<section class="cards">
+    <div class="card">
+        <h2>What You'll Learn</h2>
+        <ul>
+            <li>How to build a simple web app with Flask</li>
+            <li>How to write a Dockerfile for Python apps</li>
+            <li>How to build and run Docker images</li>
+            <li>How Flask routing and templates work</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Project Structure</h2>
+        <pre><code>flask-kube-app/
+├── app.py              # Flask application
+├── Dockerfile          # Docker build instructions
+├── requirements.txt    # Python dependencies
+├── static/
+│   └── style.css       # Stylesheet
+└── templates/
+    ├── base.html       # Base template
+    ├── index.html      # Home page
+    ├── docker.html     # About Docker
+    ├── flask.html      # About Flask
+    └── how_it_works.html</code></pre>
+    </div>
+
+    <div class="card">
+        <h2>Quick Start</h2>
+        <pre><code># Build the Docker image
+docker build -t flask-kube-app .
+
+# Run the container
+docker run -p 5001:5001 flask-kube-app
+
+# Visit http://localhost:5001</code></pre>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Flask + Docker Learning Project{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('home') }}">Flask & Docker</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a></li>
+            <li><a href="{{ url_for('about_docker') }}" class="{% if request.endpoint == 'about_docker' %}active{% endif %}">Docker</a></li>
+            <li><a href="{{ url_for('about_flask') }}" class="{% if request.endpoint == 'about_flask' %}active{% endif %}">Flask</a></li>
+            <li><a href="{{ url_for('how_it_works') }}" class="{% if request.endpoint == 'how_it_works' %}active{% endif %}">How It Works</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>Flask + Docker Learning Project | Built with Python, Flask & Docker</p>
+    </footer>
+</body>
+</html>

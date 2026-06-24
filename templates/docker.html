@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}About Docker - Flask + Docker Learning Project{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>About Docker</h1>
+    <p class="subtitle">Understanding containers and why they matter</p>
+</section>
+
+<section class="content-section">
+    <h2>What is Docker?</h2>
+    <p>
+        Docker is a platform that lets you package your application and all its dependencies
+        into a standardized unit called a <strong>container</strong>. Think of it like a shipping container
+        for your code — it works the same everywhere, regardless of the host system.
+    </p>
+</section>
+
+<section class="content-section">
+    <h2>Key Concepts</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Image</h3>
+            <p>A read-only template with instructions for creating a container. Like a recipe for your app's environment.</p>
+        </div>
+        <div class="card">
+            <h3>Container</h3>
+            <p>A running instance of an image. It's an isolated process with its own filesystem, networking, and resources.</p>
+        </div>
+        <div class="card">
+            <h3>Dockerfile</h3>
+            <p>A text file with instructions that Docker uses to build an image. Each instruction creates a layer.</p>
+        </div>
+        <div class="card">
+            <h3>Registry</h3>
+            <p>A storage location for Docker images. Docker Hub is the default public registry.</p>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>Our Dockerfile Explained</h2>
+    <pre><code># Start from Python 3.9 slim base image
+FROM python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy requirements first (for better layer caching)
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code
+COPY . .
+
+# Tell Docker this container listens on port 5001
+EXPOSE 5001
+
+# Command to run when the container starts
+CMD ["gunicorn", "--bind", "0.0.0.0:5001", "app:app"]</code></pre>
+</section>
+
+<section class="content-section">
+    <h2>Common Docker Commands</h2>
+    <table class="info-table">
+        <thead>
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>docker build -t name .</code></td>
+                <td>Build an image from a Dockerfile</td>
+            </tr>
+            <tr>
+                <td><code>docker run -p 5001:5001 name</code></td>
+                <td>Run a container from an image</td>
+            </tr>
+            <tr>
+                <td><code>docker ps</code></td>
+                <td>List running containers</td>
+            </tr>
+            <tr>
+                <td><code>docker images</code></td>
+                <td>List available images</td>
+            </tr>
+            <tr>
+                <td><code>docker stop &lt;id&gt;</code></td>
+                <td>Stop a running container</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock %}

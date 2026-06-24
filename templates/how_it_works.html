@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}How It Works - Flask + Docker Learning Project{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>How It All Works Together</h1>
+    <p class="subtitle">From code to container — the full picture</p>
+</section>
+
+<section class="content-section">
+    <h2>The Big Picture</h2>
+    <p>
+        This project demonstrates how a Python web application goes from source code on your
+        machine to a portable, runnable container. Here's the flow:
+    </p>
+
+    <div class="steps">
+        <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+                <h3>Write the App</h3>
+                <p>Create your Flask application in <code>app.py</code> with routes, templates, and static files.</p>
+            </div>
+        </div>
+        <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+                <h3>Define Dependencies</h3>
+                <p>List all Python packages in <code>requirements.txt</code> so they can be installed in the container.</p>
+            </div>
+        </div>
+        <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+                <h3>Write the Dockerfile</h3>
+                <p>Create step-by-step instructions for building the Docker image — base image, dependencies, code copy, and start command.</p>
+            </div>
+        </div>
+        <div class="step">
+            <span class="step-number">4</span>
+            <div class="step-content">
+                <h3>Build the Image</h3>
+                <p>Run <code>docker build -t flask-kube-app .</code> to create a portable image containing your app and all its dependencies.</p>
+            </div>
+        </div>
+        <div class="step">
+            <span class="step-number">5</span>
+            <div class="step-content">
+                <h3>Run the Container</h3>
+                <p>Run <code>docker run -p 5001:5001 flask-kube-app</code> to start a container from the image and map port 5001.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>Why This Approach?</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Reproducibility</h3>
+            <p>The container runs the same way on your laptop, your colleague's machine, or a cloud server. No more "works on my machine" problems.</p>
+        </div>
+        <div class="card">
+            <h3>Isolation</h3>
+            <p>Your app runs in its own environment. Different projects can use different Python versions without conflicts.</p>
+        </div>
+        <div class="card">
+            <h3>Deployment Ready</h3>
+            <p>The same image you test locally can be deployed to Kubernetes, AWS ECS, Azure App Service, or any container platform.</p>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>What Gunicorn Does</h2>
+    <p>
+        In development, Flask has a built-in server (<code>app.run()</code>). But for production,
+        we use <strong>Gunicorn</strong> — a production-grade WSGI server that:
+    </p>
+    <ul>
+        <li>Handles multiple requests concurrently with worker processes</li>
+        <li>Is more stable and performant than Flask's dev server</li>
+        <li>Manages worker lifecycle (restarts crashed workers)</li>
+    </ul>
+    <pre><code># This is what our Dockerfile uses to start the app:
+CMD ["gunicorn", "--bind", "0.0.0.0:5001", "app:app"]
+
+# "app:app" means: in the file "app.py", use the variable "app"</code></pre>
+</section>
+
+<section class="content-section">
+    <h2>Next Steps to Explore</h2>
+    <ul>
+        <li>Add a <code>docker-compose.yml</code> to manage multi-container setups</li>
+        <li>Add a database container (PostgreSQL or Redis)</li>
+        <li>Push your image to Docker Hub or a private registry</li>
+        <li>Deploy to a Kubernetes cluster</li>
+        <li>Set up a CI/CD pipeline to build and deploy automatically</li>
+    </ul>
+</section>
+{% endblock %}

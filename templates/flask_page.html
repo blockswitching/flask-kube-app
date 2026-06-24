@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}About Flask - Flask + Docker Learning Project{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>About Flask</h1>
+    <p class="subtitle">A lightweight Python web framework</p>
+</section>
+
+<section class="content-section">
+    <h2>What is Flask?</h2>
+    <p>
+        Flask is a micro web framework for Python. It's called "micro" because it keeps the core
+        simple but extensible. It doesn't include a database layer, form validation, or other
+        components — you pick what you need.
+    </p>
+</section>
+
+<section class="content-section">
+    <h2>Core Concepts</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Routes</h3>
+            <p>URLs mapped to Python functions. When a user visits a URL, Flask calls the matching function.</p>
+            <pre><code>@app.route('/')
+def home():
+    return render_template('index.html')</code></pre>
+        </div>
+        <div class="card">
+            <h3>Templates</h3>
+            <p>HTML files with placeholders that Flask fills in using the Jinja2 templating engine.</p>
+            <pre><code>&#123;% extends "base.html" %&#125;
+&#123;% block content %&#125;
+  &lt;h1&gt;Hello!&lt;/h1&gt;
+&#123;% endblock %&#125;</code></pre>
+        </div>
+        <div class="card">
+            <h3>Static Files</h3>
+            <p>CSS, JavaScript, and images served from the <code>static/</code> folder.</p>
+            <pre><code>url_for('static', filename='style.css')</code></pre>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>How This App Works</h2>
+    <pre><code>from flask import Flask, render_template
+
+# Create the Flask application instance
+app = Flask(__name__)
+
+# Define a route for the home page
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+# Run the app (for local development)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5001)</code></pre>
+</section>
+
+<section class="content-section">
+    <h2>Flask vs Other Frameworks</h2>
+    <table class="info-table">
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Flask</th>
+                <th>Django</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Philosophy</td>
+                <td>Minimalist, flexible</td>
+                <td>Batteries included</td>
+            </tr>
+            <tr>
+                <td>Learning Curve</td>
+                <td>Gentle</td>
+                <td>Steeper</td>
+            </tr>
+            <tr>
+                <td>Best For</td>
+                <td>Small to medium apps, APIs</td>
+                <td>Large, complex applications</td>
+            </tr>
+            <tr>
+                <td>Template Engine</td>
+                <td>Jinja2</td>
+                <td>Django Templates</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock %}
